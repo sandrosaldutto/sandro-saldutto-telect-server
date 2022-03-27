@@ -1,6 +1,6 @@
 require('dotenv').config();
-const express = require("express"); //require express package
-const app = express(); //invoke an instance of express for our server
+const express = require("express"); 
+const app = express();
 const cors = require('cors');
 
 const PORT = process.env.PORT || 8080;
