@@ -1,0 +1,19 @@
+{
+  "name": "telect-server",
+  "version": "1.0.0",
+  "description": "Back-End",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandrosaldutto/sandro-saldutto-telect-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandrosaldutto/sandro-saldutto-telect-server/issues"
+  },
+  "homepage": "https://github.com/sandrosaldutto/sandro-saldutto-telect-server#readme"
+}
