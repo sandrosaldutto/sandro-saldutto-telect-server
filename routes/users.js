@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const usersController = require('../controllers/userControllers');
 
-router.route('/')
+router.route('/register')
     .post(usersController.addOne);
 
 router.route('/:userId')

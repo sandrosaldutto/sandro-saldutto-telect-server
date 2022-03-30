@@ -14,7 +14,8 @@ exports.getOne = (req, res) => {
 // add user
 
 exports.addOne = (req, res) => {
-    if (!req.body.email || !req.body.name || !req.body.password) {
+    console.log(req.body)
+    if (!req.body.username || !req.body.name || !req.body.password) {
         res.status(400).send({
             message: "Please enter all required fields."
         })
@@ -22,6 +23,7 @@ exports.addOne = (req, res) => {
         knex('users')
             .insert(req.body)
             .then(newUser => {
+                console.log("newuser:", newUser)
                 res.json(newUser)
             })
     }
