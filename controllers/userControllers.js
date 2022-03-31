@@ -110,3 +110,24 @@ exports.deleteUser = (req, res) => {
     });
 };
 
+// add show
+exports.addShow = (req, res) => {
+  const { showId } = req.body;
+
+  if (!showId) {
+    return res.status(400).send({
+      message: "Please enter the required fields",
+    });
+  }
+  knex("mylist")
+  .insert({
+    showId: showId,
+    userId: userId, 
+  })
+  .then(() => {
+    res
+    .status(201)
+    .send("success")
+  })
+}
+

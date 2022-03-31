@@ -12,6 +12,9 @@ app.use(cors());
 const userRoutes = require("./routes/users");
 app.use('/users', userRoutes)
 
+const userShows = require("./routes/mylist");
+app.use('/mylist', userShows)
+
 //Listen
 app.listen(PORT, () => {
     console.log("server is running on port " + PORT)
