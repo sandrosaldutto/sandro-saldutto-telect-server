@@ -53,7 +53,7 @@ exports.login = (req, res) => {
       message: "Please enter the required fields",
     });
   }
-  
+
   knex("users")
     .where({ username: username })
     .first()
@@ -64,7 +64,8 @@ exports.login = (req, res) => {
           message: "Invalid Password. Please try again",
         });
       }
-
+      const userId = user.id
+      console.log(userId)
       const token = jwt.sign(
         {
           id: user.id,
@@ -73,7 +74,7 @@ exports.login = (req, res) => {
         "TelecttceleT"
       );
 
-      res.status(200).json({ token: token });
+      res.status(200).json({ token: token, userId: userId });
     })
     .catch(() => {
       res.status(400).send({
@@ -112,8 +113,8 @@ exports.deleteUser = (req, res) => {
 
 // add show
 exports.addShow = (req, res) => {
-  const { showId } = req.body;
-
+  const { showId, userId } = req.body;
+  console.log("addshow")
   if (!showId) {
     return res.status(400).send({
       message: "Please enter the required fields",
@@ -122,7 +123,7 @@ exports.addShow = (req, res) => {
   knex("mylist")
   .insert({
     showId: showId,
-    userId: userId, 
+    users_id: userId, 
   })
   .then(() => {
     res
