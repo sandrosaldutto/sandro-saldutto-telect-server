@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-    //JWT will be part of the header format of header: { authorization: `Bearer ${authToken}` }
 
     const { authorization } = req.headers
 

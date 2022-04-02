@@ -1,8 +1,6 @@
 const knex = require("knex")(require("../knexfile").development);
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { query } = require("express");
-
 
 // add user
 exports.addUser = (req, res) => {
@@ -10,7 +8,7 @@ exports.addUser = (req, res) => {
 
   if (!name || !username || !password) {
     return res.status(400).send({
-      message: "Please enter the required fields",
+      message: "Please enter all of the required fields",
     });
   }
 
@@ -28,9 +26,9 @@ exports.addUser = (req, res) => {
       });
     })
     .catch(() => {
-        res.status(500).send({
-            message: "Error registering user",
-        });
+      res.status(500).send({
+        message: "Error registering user",
+      });
     });
 };
 
@@ -40,7 +38,7 @@ exports.login = (req, res) => {
 
   if (!username || !password) {
     return res.status(400).send({
-      message: "Please enter the required fields",
+      message: "Please enter all of the required fields",
     });
   }
 
@@ -54,8 +52,7 @@ exports.login = (req, res) => {
           message: "Invalid Password. Please try again",
         });
       }
-      const userId = user.id
-      console.log(userId)
+      const userId = user.id;
       const token = jwt.sign(
         {
           id: user.id,
@@ -64,7 +61,10 @@ exports.login = (req, res) => {
         "TelecttceleT"
       );
 
-      res.status(200).json({ token: token, userId: userId });
+      res.status(200).json({
+        token: token,
+        userId: userId,
+      });
     })
     .catch(() => {
       res.status(400).send({
@@ -73,38 +73,33 @@ exports.login = (req, res) => {
     });
 };
 
-
 // add show
 exports.addShow = (req, res) => {
   const { showId, userId } = req.body;
-  console.log("addshow")
+
   if (!showId) {
     return res.status(400).send({
       message: "Please enter the required fields",
     });
   }
   knex("mylist")
-  .insert({
-    showId: showId,
-    users_id: userId, 
-  })
-  .then(() => {
-    res
-    .status(201)
-    .send("success")
-  })
+    .insert({
+      showId: showId,
+      users_id: userId,
+    })
+    .then(() => {
+      res.status(201).send("success");
+    });
 };
 
 // get all shows by user
 
 exports.getAllShowsByUser = (req, res) => {
-  const userId = req.params.userId
-  console.log(userId)
-  knex ('mylist')
-    .where({"users_id": userId})
-    .then((response)=> {
-      res
-      .status(200)
-      .send(response)
-    })    
+  const userId = req.params.userId;
+
+  knex("mylist")
+    .where({ users_id: userId })
+    .then((response) => {
+      res.status(200).send(response);
+    });
 };
