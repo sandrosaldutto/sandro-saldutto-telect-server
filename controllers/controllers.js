@@ -1,17 +1,8 @@
 const knex = require("knex")(require("../knexfile").development);
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { query } = require("express");
 
-
-// get one user
-exports.getUser = (req, res) => {
-  knex("users")
-    .where({ "users.id": req.params.userId })
-    .first()
-    .then((usersInfo) => {
-      res.json(usersInfo);
-    });
-};
 
 // add user
 exports.addUser = (req, res) => {
@@ -25,7 +16,6 @@ exports.addUser = (req, res) => {
 
   const hashedPassword = bcrypt.hashSync(password, 10);
 
-  //save the information to database
   knex("users")
     .insert({
       name: name,
@@ -83,33 +73,6 @@ exports.login = (req, res) => {
     });
 };
 
-// edit user
-exports.editUser = (req, res) => {
-  knex("users")
-    .update(req.body)
-    .where({ id: req.params.userId })
-    .then(() => {
-      res.send(`User with id: ${req.params.userId} is now updated`);
-    })
-    .catch((err) => {
-      res.status(400).send(`Error updating user ${req.params.userId} ${err}`);
-    });
-};
-
-// delete user
-exports.deleteUser = (req, res) => {
-  knex("users")
-    .delete()
-    .where({ id: req.params.userId })
-    .then(() => {
-      res
-        .status(204)
-        .send(`User with id ${req.params.userId} has been deleted`);
-    })
-    .catch((err) => {
-      res.status(400).send(`Error deleting user ${req.params.userId} ${err}`);
-    });
-};
 
 // add show
 exports.addShow = (req, res) => {
@@ -130,5 +93,21 @@ exports.addShow = (req, res) => {
     .status(201)
     .send("success")
   })
-}
+};
 
+// get all shows by user
+
+exports.getAllShowsByUser = (req, res) => {
+  const { userId } = req.body
+  console.log(req.body)
+  knex ('mylist')
+    .select(
+      "*"
+    )
+    .where({"mylist.users_id": userId})
+    .then(()=> {
+      res
+      .status(200)
+      .send("success")
+    })    
+};
