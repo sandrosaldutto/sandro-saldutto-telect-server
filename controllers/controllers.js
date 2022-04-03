@@ -103,3 +103,15 @@ exports.getAllShowsByUser = (req, res) => {
       res.status(200).send(response);
     });
 };
+
+exports.deleteShowByUser = (req, res) => {
+  knex('mylist')
+      .delete()
+      .where({showId: req.params.showId})
+      .then(() => {
+          res.status(204).send(`User has successfully deleted show with show ID: ${req.params.showId} `)
+      })
+      .catch(err => {
+          res.status(400).send(`Error deleting show with showID: ${req.params.showId}`)
+      })
+}

@@ -6,7 +6,8 @@ router.route("/")
     .post(controllers.addShow)
     
 router.route("/:userId")
-    .get(controllers.getAllShowsByUser);
+    .get(controllers.getAllShowsByUser)
+    .delete(controllers.deleteShowByUser);
 
 
 module.exports = router;
