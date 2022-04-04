@@ -7,6 +7,8 @@ router.route("/")
     
 router.route("/:userId")
     .get(controllers.getAllShowsByUser)
+
+router.route("/:userId/:showId")
     .delete(controllers.deleteShowByUser);
 
 
