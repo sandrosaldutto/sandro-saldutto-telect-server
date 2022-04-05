@@ -1,3 +1,6 @@
+Back-End:
+Node/Express backend API with JWT for auth, and Knex to query a MySQL database.
+
 You will need npm, node and MySQL.
 
 1. Clone or download my repo.
