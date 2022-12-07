@@ -96,14 +96,11 @@ exports.addShow = (req, res) => {
 
 exports.getAllShowsByUser = (req, res) => {
   const userId = req.params.userId;
-  console.log("clicked");
-
-  res.status(204).send("success");
-  // knex("mylist")
-  //   .where({ users_id: userId })
-  //   .then((response) => {
-  //     res.status(200).send(response);
-  //   });
+  knex("mylist")
+    .where({ users_id: userId })
+    .then((response) => {
+      res.status(200).send(response);
+    });
 };
 
 exports.deleteShowByUser = (req, res) => {
