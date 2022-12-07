@@ -96,23 +96,28 @@ exports.addShow = (req, res) => {
 
 exports.getAllShowsByUser = (req, res) => {
   const userId = req.params.userId;
-
-  knex("mylist")
-    .where({ users_id: userId })
-    .then((response) => {
-      res.status(200).send(response);
-    });
+  console.log("clicked");
+  // knex("mylist")
+  //   .where({ users_id: userId })
+  //   .then((response) => {
+  //     res.status(200).send(response);
+  //   });
 };
 
 exports.deleteShowByUser = (req, res) => {
-  knex('mylist')
-      .delete()
-      .where({showId: req.params.showId, users_id: req.params.userId})
-      .then(() => {
-          res.status(204).send(`User has successfully deleted show with show ID: ${req.params.showId} `)
-          
-      })
-      .catch(err => {
-          res.status(400).send(`Error deleting show with showID: ${req.params.showId}`)
-      })
-}
+  knex("mylist")
+    .delete()
+    .where({ showId: req.params.showId, users_id: req.params.userId })
+    .then(() => {
+      res
+        .status(204)
+        .send(
+          `User has successfully deleted show with show ID: ${req.params.showId} `
+        );
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .send(`Error deleting show with showID: ${req.params.showId}`);
+    });
+};
