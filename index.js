@@ -14,10 +14,6 @@ app.use("/users", userRoutes);
 const userShows = require("./routes/mylist");
 app.use("/mylist", userShows);
 
-app.get("/", (req, res) => {
-  res.status(204).send("success");
-});
-
 app.listen(PORT, () => {
   console.log("server is running on port " + PORT);
 });

@@ -96,9 +96,11 @@ exports.addShow = (req, res) => {
 
 exports.getAllShowsByUser = (req, res) => {
   const userId = req.params.userId;
+  console.log(userId);
   knex("mylist")
     .where({ users_id: userId })
     .then((response) => {
+      console.log(response);
       res.status(200).send(response);
     });
 };
